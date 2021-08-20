@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body>
+<div th:switch="${employees}">
+    <h2 th:case="null">No employees found</h2>
+    <div th:case="*">
+        <h2 class="h1">Employees</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Department</th>
+                <th>Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.surname}"></td>
+                <td th:text="${employee.department}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td><a th:href="@{employee-update/{id}(id=${employee.id})}">Edit</a></td>
+                <td><a th:href="@{employee-delete/{id}(id=${employee.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/employee-create">Create Employee</a></p>
+</div>
+</body>
+</html>
